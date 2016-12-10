@@ -1,0 +1,84 @@
+<br><div style="border: 1px solid #5cb85c" class="card card-outline-secondary  col-md-12">
+  <div class="card-block">
+	<!-- <b><h2 class="card-title text-xs-center">General Competency Test</h2></b>
+	<h6 class="card-subtitle text-muted text-xs-center">The purpose of this test is to evaluate your PUC level skills.</h6>
+	<p>The competency test consists of 3 components:
+	<ul style="list-style-type: none">
+		<li>I. Aptitude Test </li>
+		<li>II. English Language Comprehension Test </li>
+		<li>III. Telugu Language Comprehension Test </li>
+	</ul>
+	</p>
+	<div class="text-xs-right"><a class="btn btn-primary" href="http://fju-gct.appspot.com/" target="_blank">Take me to the Test Portal</a></div> -->
+	<b><h2 class="card-title text-xs-center">Entrance Tests</h2></b><br>
+	<h6 class="card-subtitle text-muted text-xs-center">Please choose a suitable timeslot to take the Entrance Exams.</h6><br>
+	<div class="col-md-5" style="border: 1px solid black" id="test_slots"></div>
+	<div class="col-md-7">
+		<ul>
+			<li>You can book slots at any date starting from today.</li>
+			<li>You cannot book a slot on Sunday.</li>
+			<li>Some dates are disabled which means they are already booked.</li>
+		</ul>
+		<p>Exam commences at 9 A.M in the morning on selected date.</p>
+	</div>
+	<br>
+  </div>
+  <div style="padding-left: 39px">Selected Date: <b id="selected_slot"></b></div>
+  <div class="text-xs-right"><a class="btn btn-primary disabled" id="finish">Finish</a></div><br>
+</div>
+<script type="text/javascript">
+	var selected_date = "";	
+	var email = localStorage.getItem('email')
+	var time = new Date().getHours();
+	var day = new Date().getDate();
+	if(time>9){
+		day+=1;	
+	}
+	if(day<10){
+		day = "0"+day
+	}
+	var month = new Date().getMonth()+1;
+	if(month<10){
+		month = "0"+month
+	}
+	var year = new Date().getFullYear();
+	var date = month+"/"+ day+"/"+ year;
+	var emonth = 0;
+	var eyear = 0;
+	if(month==12){
+		emonth = 1;
+		eyear = year+1;
+	}else{
+		emonth = month+1;
+		eyear = year;
+	}
+	var end_date = emonth+"/"+ day+"/"+ eyear;
+	// console.log(typeof(localStorage.getItem('selected_dates')).split(","))
+	$('#test_slots').datepicker({
+	    startDate: date,
+	    endDate: end_date,
+	    daysOfWeekDisabled: "0",
+	    datesDisabled: localStorage.getItem('selected_dates').split(",")
+	});
+
+	$('#test_slots').on('changeDate', function(event) {
+	    $("#selected_slot").html(event.format());
+	    $("#finish").removeClass("disabled");
+	    selected_date = event.format();
+	});
+	$("#finish").click(function() {
+		dataobj = {};
+		dataobj["email"] = email;
+		dataobj["selected_date"] = selected_date;
+		console.log(dataobj)
+		$.post( "/datesubmit", dataobj, function( data ) {
+			localStorage.setItem('email', data.substr(10))
+			localStorage.setItem('selected_date', data.substr(0,10))
+			$("#progress").attr("value","75");
+		    $("#heading").html("Enrollment Process - Step 3");
+		    $("#supptext").html("");
+		    $("#content").html("");
+		    $("#content").load("enrollment_step3.html");
+		});
+	})
+</script>

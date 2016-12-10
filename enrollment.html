@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>FJU Android Developer Diploma</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js"></script>
+	<script src="http://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/v4.0.0/src/js/bootstrap-datetimepicker.js"></script>
+	<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="http://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/v4.0.0/build/css/bootstrap-datetimepicker.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+	<script src="js/bootstrap-datepicker.js"></script>
+	<link href="css/bootstrap-datepicker.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="cover.css">
+	<script src="https://use.fontawesome.com/7c465464d6.js"></script>
+</head>
+<style type="text/css">
+	/*h6 {
+		padding-top: 3%;
+		padding-bottom: 30px;
+	}*/
+	p {
+		color: #525c65;
+    	font-weight: 400;
+    	font-size: 1.125rem;
+    	line-height: 2rem;
+	}
+	.text-muted {
+		color: #7d97ad;
+		font-family: "Open Sans", sans-serif;
+	}
+	.error {
+		padding-left: 1%; 
+    	color: red;
+    	/*font-size: 11px;*/
+  	}
+  	header{
+		background-color: #ad172b;
+    	z-index: 8000;
+    	/*box-shadow: 0px 1px 2px rgba(0,0,0,0.1);*/
+    	position: fixed;
+    	width: 100%;
+	}
+	h1 {
+		font-size: 2.5rem;
+    	line-height: 3rem;
+    	font-weight: 300;
+	}
+	h6 {
+		letter-spacing: 0.125rem;
+	    text-transform: uppercase;
+	    font-weight: 600;
+	    color: #7d97ad;
+	    font-size: 0.8125rem;
+    	line-height: 1.5rem;
+	}
+	#small_head {
+		position: absolute;
+		background-color: transparent;
+		/*margin-top: 9%;*/
+		color: #f2f1eb;
+	}
+	#small_head p, h6 {
+		color: #f2f1eb;
+	}
+	.logo {
+		font-size: 2rem;
+		font-weight: 500;
+		padding: 2%;
+		color: #f2f1eb;
+	}
+	#log{
+		color: inherit;
+  		text-decoration: none;
+	}
+</style>
+<body>
+	<div id="small_head" class="col-md-6 text-xs-center"><br>
+			<h1 class="logo"><a id="log" href="#">Franklin Jefferson University</a></h1><br>
+			<h6>ONLINE DIPLOMA PROGRAM</h6>
+
+			<h1>Mobile App Development</h1>
+
+			<p >Mastery in Building Android Apps</p>
+		</div>
+		<div class="col-md-3"></div><div class="col-md-3"></div>
+	<!-- </div> -->
+	<div style="padding: 0px;" class="container-fluid text-xs-right">
+		<img style="border: 0px solid #ccc;" width="100%" height="350px" src="banner2.png">
+		
+		<!-- <p>Android apps are everywhere, and learning to build them can be a fantastic career move. No programming experience? No problem! The skills you learn in this beginning program will accelerate your journey to becoming a working Android Developer.</p>
+		<p>Learn the Java language, and start building amazing new apps for those billion (and counting!) Android devices!</p> -->
+	</div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<!-- <h1 class="text-xs-center">FJU Android Diploma Program</h1><br> -->
+			<div class="col-md-2"></div>
+			<div id="stepscontainer" class="col-md-8">
+				<!-- <hr> --><br><br>
+				<progress id="progress" style="height: 10px" class="progress progress-success" value="25" max="75"></progress>
+				<h4 id="heading">Enrollment Process - Step 1</h4>
+				<small id="supptext" class="text-muted">Please fill out some Personal Information</small>
+				<div id="content">
+					<br>
+					<form action="" id="enrollform" name="enroll">
+					  	<div class="form-group col-md-6">
+						    <b><label for="FName">First Name</label></b>
+						    <input type="text" class="form-control" name="first_name" id="FName" aria-describedby="emailHelp" placeholder="Enter your First Name">
+					  	</div>
+					  	<div class="form-group col-md-6">
+						    <b><label for="LName">Last Name</label></b>
+						    <input type="text" class="form-control" name="last_name" id="LName" aria-describedby="emailHelp" placeholder="Enter your Last Name">
+					  	</div>
+					  	<div class="form-group col-md-6">
+						    <b><label for="email">Email Address</label></b>
+						    <input type="text" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Enter your Email Address">
+					  	</div>
+					  	<div class="form-group col-md-6">
+				            <div class="input-group datetime datepicker">
+				              <b><label for="dob">Date of Birth</label></b>
+							  <input class="form-control make-datepicker" type="text" name="dob" id="dob" placeholder="Enter Date of Birth">
+							</div>
+				        </div>
+					  	<div class="form-group col-md-6">
+					        <b><label for="gender" class="control-label">Gender</label></b>
+					        <div>
+					            <select class="form-control" name="gender" id="gender">
+					                <option value="Male">Male</option>
+					                <option value="Female">Female</option>
+					            </select>
+					        </div>
+					    </div>
+					  
+					  <div class="form-group col-md-6">
+					        <b><label for="country" class="control-label">Country</label></b>
+					        <div>
+					            <select class="form-control" name="country" id="country">
+					                <option value="United States">United States</option>
+					                <option value="Bulgaria">Bulgaria</option>
+					                <option value="Brazil">Brazil</option>
+					                <option value="China">China</option>
+					                <option value="Czech Republic">Czech Republic</option>
+					                <option value="Denmark">Denmark</option>
+					                <option value="France">France</option>
+					                <option value="Germany">Germany</option>
+					                <option value="India" selected>India</option>
+					                <option value="Morocco">Morocco</option>
+					                <option value="Netherlands">Netherlands</option>
+					                <option value="Pakistan">Pakistan</option>
+					                <option value="Romania">Romania</option>
+					                <option value="Russia">Russia</option>
+					                <option value="Slovakia">Slovakia</option>
+					                <option value="Spain">Spain</option>
+					                <option value="Thailand">Thailand</option>
+					                <option value="United Arab Emirates">United Arab Emirates</option>
+					                <option value="United Kingdom">United Kingdom</option>
+					                <option value="Venezuela">Venezuela</option>
+					            </select>
+					        </div>
+					    </div>
+					    <div class="form-group col-md-6">
+					        <b><label for="phonenumber" class="control-label">Phone number</label></b>
+					        <div>
+					            <input type="text" class="form-control" name="phonenumber" id="phonenumber" placeholder="Phone number"/>
+					        </div>
+					    </div>
+					    <div class="form-group col-md-6">
+					        <b><label for="phonenumber" class="control-label">Skype ID</label></b>
+					        <div>
+					            <input type="text" class="form-control" name="skype_id" id="skype_id" placeholder="Skype ID"/>
+					        </div>
+					    </div>
+					  <div class="form-group col-md-12">
+					    <b><label>Address</label></b>
+					    <div class="row">
+					    <div class="col-md-12"><input type="text" class="form-control" name="address1" id="address1" aria-describedby="emailHelp" placeholder="Address Line 1"><br></div>
+					    <div class="col-md-12"><input type="text" class="form-control" name="address2" id="address2" aria-describedby="emailHelp" placeholder="Address Line 2"><br></div>
+					   <div class="col-md-6"><input type="text" class="form-control" name="state" id="state" placeholder="State"></div>
+					  	<div class="col-md-6"><input type="text" class="form-control" name="pincode" id="pincode" placeholder="Pincode"></div>
+					  	</div>
+					  </div>
+					    
+					    <div class="form-group col-md-12">
+					    	<b><label>Graduation</label></b>
+					    	<div class="row">
+					    		<div class="form-check col-md-12">
+							      <label class="form-check-label">
+							        <input type="radio" class="form-check-input" name="graduation_status" id="status1" value="pursuing">
+							        Current Student
+							      </label>&nbsp;&nbsp;
+							      <label class="form-check-label">
+							        <input type="radio" class="form-check-input" name="graduation_status" id="status2" value="completed" checked>
+							        Graduated
+							      </label>
+							    </div>
+							    <div class="col-md-12">
+							    	<div class="col-md-6">
+								    	<input type="text" class="form-control" name="college" id="College" placeholder="University/College Name"><br>
+								    </div>
+								    <div class="col-md-3">
+							    		<input type="text" class="form-control" name="course" id="course" placeholder="course">
+						    		</div>
+						    		<div class="col-md-3">
+							    		<input type="text" class="form-control" name="branch" id="branch" placeholder="branch">
+						    		</div>
+							    </div>
+						    	
+					    		<div class="col-md-12">
+					    			<div class="col-md-4">
+						    			<input type="text" class="form-control" name="GPA" id="GPA" placeholder="GPA">
+								    </div>
+							    	<div class="col-md-4">
+								    	<input type="text" class="form-control" name="year_of_completion" id="year_of_completion" placeholder="Year of passing">
+							    	</div>
+					    		</div>
+						    </div>
+					  	</div>
+					  <div class="text-xs-center col-md-12">
+					  	<button style="margin-top: 3%" type="button" id="enrollSubmit" class="btn btn-primary">Submit</button>
+					</div>
+					</form>
+				</div>
+			</div>
+			<div class="col-md-2"></div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+
+	$('.datepicker').each(function(k, v) {
+	  var $input = $(v).find('.make-datepicker');
+	  $input.datetimepicker({
+	    format: 'MMM Do YYYY',
+	    collapse: true
+	  });
+	  $(v).find('span.input-group-addon').click(function(e) {
+	    $input.focus(); 
+	  });
+	});
+
+	$('input[type=radio][name=graduation_status]').change(function() {
+		$("#GPA").attr('disabled', function (_, attr) { return !attr });
+		$("#year_of_completion").attr('disabled', function (_, attr) { return !attr });
+	})
+
+	$('#enrollform input').blur(function(){
+	    if( $(this).val().length === 0 ) {
+	        $(this).parents('label').addClass('error');
+	    }
+	});
+
+	$("#enrollSubmit").click(function(){
+		function submitForm() {
+			dataobj = {};
+			var data = $("form[name='enroll']").serialize();
+			data = data.split('&');
+			for(var i=0; i<data.length; i++){
+				dataobj[data[i].split('=')[0]] = data[i].split('=')[1];
+			}
+
+			$.post( "/formsubmit", dataobj, function( data ) {
+			   	if (data.startsWith("redirect")) {
+			   		localStorage.setItem("selected_date",data.substr(8,10))
+			   		localStorage.setItem("email",data.substr(18))
+			   		$("#progress").attr("value","75");
+				    $("#heading").html("Enrollment Process - Step 3");
+				    $("#supptext").html("You are already enrolled with us.");
+				    $("#content").html("");
+				    $("#content").load("enrollment_step3.html");
+			   	}else{
+			   		obj = JSON.parse(data);
+			   		localStorage.setItem('selected_dates', obj.selected_dates);
+					localStorage.setItem('email', obj.email)
+			   		$("#progress").attr("value","50");
+					$("#heading").html("Enrollment Process - Step 2");
+					$("#supptext").html("You are registered with email: "+obj['email'].replace("%40","@")+". Please choose a date to take the Entrance Exams.");
+					$("#content").html("");
+					$("#content").load("enrollment_step2.html");
+			  	}
+			});
+		}
+		if( $('.error').length == 0){
+			submitForm();
+		}
+	});
+});
+				
+</script>
+<script src="form-validation.js"></script>
+</body>
+</html>

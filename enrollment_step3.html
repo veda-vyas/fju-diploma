@@ -1,0 +1,25 @@
+<style type="text/css">
+	.fa-check-circle {
+		margin: 1%;
+		color: #15c26b;
+	}
+</style>
+<br><div style="border: 1px solid #5cb85c" class="card card-outline-secondary  col-md-12">
+  <div class="card-block">
+	<b><h2 class="card-title text-xs-center"><i class="fa fa-check-circle" aria-hidden="true"></i> Enrollment Succesfull</h2></b><br>
+	<h6 class="card-subtitle text-muted">Registered Email: </h6><b><i id="email"></i></b><br><br>
+	<h6 class="card-subtitle text-muted">Selected Date: <small>(MM/DD/YYYY)</small></h6><b><i id="sdate"></i></b><br><br>
+	<!-- <p>The competency test consists of 3 components:
+	<ul style="list-style-type: none">
+		<li>I. Aptitude Test </li>
+		<li>II. English Language Comprehension Test </li>
+		<li>III. Telugu Language Comprehension Test </li>
+	</ul>
+	</p> -->
+	<div class="text-xs-center"><a class="btn btn-primary" href="http://fju-diploma.appspot.com/">Back to Homepage</a></div>
+  </div>
+</div>
+<script type="text/javascript">
+	$("#email").html(localStorage.getItem("email").replace("%40","@"));
+	$("#sdate").html(localStorage.getItem("selected_date"));
+</script>
