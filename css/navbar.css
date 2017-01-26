@@ -1,0 +1,322 @@
+
+
+h1 {
+		font-size: 2.5rem;
+    	line-height: 3rem;
+    	font-weight: 300;
+	}
+	h2 {
+		font-size: 2.2rem;
+    	line-height: 3rem;
+    	font-weight: 300;
+	}
+	h4 {
+		font-size: 22px;
+    	line-height: 2rem;
+    	font-weight: 500;
+	}
+	h6 {
+		letter-spacing: 0.125rem;
+	    text-transform: uppercase;
+	    font-weight: 600;
+	    color: #7d97ad;
+	    font-size: 0.8125rem;
+    	line-height: 1.5rem;
+	}
+	.spl-h6 {
+		letter-spacing: 0.125rem;
+	    text-transform: uppercase;
+	    font-weight: 700;
+	    color: #55595c;
+	    font-size: 1rem;
+    	line-height: 1.5rem;
+    	padding: 1%;
+    	margin-bottom: 0px;
+	}
+	p {
+		color: black;
+    	font-weight: 400;
+    	font-size: 18px;
+    	line-height: 2rem;
+    	padding-left: 1%;
+	}
+	.syllabus {
+		/*background: #f4f4ef;*/
+		background-color: transparent;
+	}
+	.card-block {
+		height: 100%;
+		border: 1px solid #dbe2e8;
+		box-shadow: 0 0.3125em 1.25em 0 rgba(46,61,73,0.12);
+	}
+	.card-block h6 {
+		color: #818a91;
+	}
+	.spl-ul li {
+		padding: 1%;
+	}
+	#spec-ul {
+		padding: 0;
+	}
+	.glyphicon-ok-sign {
+		margin: 1%;
+		color: #15c26b;
+	}
+	.enrollment {
+		/*background-color: #f4f4ef;*/
+		background-color: white;
+	}
+	#enrollment {
+		background: #fff;
+	    border: 1px solid #dbe2e8;
+	    box-shadow: 0 0.3125em 1.25em 0 rgba(46,61,73,0.12);
+	    padding: 9%;
+	    padding-top: 4%;
+	}
+	header{
+		background-color: #ad172b;
+    	z-index: 8000;
+    	/*box-shadow: 0px 1px 2px rgba(0,0,0,0.1);*/
+    	position: fixed;
+    	width: 100%;
+	}
+	.logo {
+		font-size: 2rem;
+		font-weight: 500;
+		padding: 2%;
+		color: #f2f1eb;
+	}
+	/*#nav_fields {
+		padding-top: 2%;
+	}*/
+	#nav_fields a {
+		font-weight: 200;
+		padding-bottom: 7px;
+		/*margin-left: 10%;*/
+		/*color: blue;*/
+		/*font-family: cursive;*/
+		text-decoration: none;
+		font-size: 128%;
+	}
+	.affix{
+	    position:fixed;
+	    top:0;
+	    right:0;
+	    border-bottom: 1px solid gray;
+	    background-color: rgb(128, 0, 0);
+	    /*color: #f2f1eb;*/
+	    text-decoration: none;
+	    width: 100%;
+	    z-index: 999;
+	    padding-top: 30px;
+	    min-height: 80px;
+	}
+	.affix a {
+		/*color: #f2f1eb;*/
+		color: black;
+		text-decoration: none;
+	}
+	/*a:hover {
+    	text-decoration: none;
+	}
+	a:active {
+    	text-decoration: none;
+	}*/
+	#small_head {
+		/*position: absolute;*/
+		/*margin-top: 9%;*/
+		padding-top: 80px;
+		color: #f2f1eb;
+		height: 100%;
+		width: 100%;
+		background-color: rgba(128, 0, 0, 0.82);
+		border-top: 1px solid white;
+	}
+	#small_head p, h6 {
+		color: #f2f1eb;
+	}
+	#log{
+		color: inherit;
+  		text-decoration: none;
+  		font-family: lucida calligraphy;
+  		font-weight: 400;
+	}
+
+	ul.tab {
+	    list-style-type: none;
+	    margin: 0;
+	    padding: 0;
+	    overflow: hidden;
+	    border: 1px solid #ccc;
+	    background-color: #f1f1f1;
+	    margin-top: 3%;
+	    margin-bottom: 2%
+	}
+
+	/* Float the list items side by side */
+	/*ul.tab li {
+		width: 33%;
+	}*/
+
+	/* Style the links inside the list items */
+	ul.tab li a {
+	    /*display: inline-block;*/
+	    color: black;
+	    text-align: center;
+	    padding: 14px 16px;
+	    text-decoration: none;
+	    transition: 0.3s;
+	    font-size: 17px;
+	}
+
+	/* Change background color of links on hover */
+	/*ul.tab li:hover {
+	    background-color: #ddd;
+	    cursor: pointer;
+	}
+
+	 Create an active/current tablink class 
+	ul.tab li:focus, .active {
+	    background-color: #ddd;
+	}*/
+
+	/* Style the tab content */
+	/*.tabcontent {
+	    display: none;
+	    padding: 6px 12px;
+	    -webkit-animation: fadeEffect 1s;
+	    animation: fadeEffect 1s;
+	    margin-left: 5%;
+	    margin-right: 5%;
+	}*/
+
+	@-webkit-keyframes fadeEffect {
+	    from {opacity: 0;}
+	    to {opacity: 1;}
+	}
+
+	@keyframes fadeEffect {
+	    from {opacity: 0;}
+	    to {opacity: 1;}
+	}
+@media screen 
+and (min-width : 1200px) 
+and (orientation: portrait) {
+	.card-block {
+		height: 100%;
+		border: 1px solid #dbe2e8;
+		box-shadow: 0 0.3125em 1.25em 0 rgba(46,61,73,0.12);
+	}
+}
+body {
+	color: black !important
+}
+
+.navbar {
+	background-color: #2d4250;
+	border-bottom: 1px solid white;
+	padding: 0px;
+	height: 80px;
+	z-index: 1;
+}
+
+.navbar-nav li {
+	margin: 10px;
+	margin-top: 15px;
+}
+
+.navbar-nav li a {
+	color: rgba(255, 255, 255, .8);
+	font-weight: 600;
+}
+
+.navbar-nav li a:hover {
+	color: white;
+	font-weight: 600;
+	background-color: transparent;
+}
+
+.navbar-nav li:hover {
+	background-color: transparent !important;
+}
+.open a{
+	background-color: transparent !important;
+}
+.open a:hover {
+	background-color: transparent !important;
+}
+.open a:focus {
+	background-color: transparent !important;
+}
+.navbar .navbar-nav {
+	display: inline-block;
+    float: none;
+}
+.navbar .navbar-collapse {
+    text-align: center;
+}
+.dropdown-menu{
+	border-top: 2px solid black;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+.dropdown-menu li {
+	margin: 0px;
+	border-bottom: 1px solid #ccc;
+}
+
+.dropdown-menu li a {
+	color: black;
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+.dropdown-menu li a:hover {
+	color: black;
+}
+
+.navbar-brand {
+	color: white;
+	font-family: "Lucida Calligraphy";
+	margin-top: 20px;
+}
+.navbar-brand:focus {
+	color: white;
+}
+
+.icon-bar {
+	background-color: white;
+}
+
+.navbar-toggle {
+	border:1px solid white;
+	margin-top: 23px;
+	margin-left: 20px;
+}
+@media only screen and (max-width: 766px) {
+	.navbar-collapse {
+		background-color: #2d4250;
+		text-align: left !important;
+	}
+	.dropdown-menu li {
+		margin: 0px;
+		border-bottom: 0px !important;
+	}
+
+	.dropdown-menu li a {
+		color: rgba(255, 255, 255, .8);
+		padding-top: 8px;
+		padding-bottom: 8px;
+	}
+}
+
+@media only screen and (max-width: 360px) {
+	.navbar-toggle {
+		border:1px solid white;
+		margin-top: 23px;
+		margin-left: 10px;
+	}
+	.navbar-brand {
+		padding-left: 0px;
+	}	
+}
+

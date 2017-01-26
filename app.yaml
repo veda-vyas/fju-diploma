@@ -5,61 +5,11 @@ api_version: 1
 threadsafe: yes
 
 handlers:
-- url: /favicon\.ico
-  static_files: favicon.ico
-  upload: favicon\.ico
-
-- url: /form-validation\.js
-  static_files: form-validation.js
-  upload: form-validation\.js
-
-- url: /enrollment_step1\.html
-  static_files: enrollment_step1.html
-  upload: enrollment_step1\.html
-
-- url: /enrollment_step2\.html
-  static_files: enrollment_step2.html
-  upload: enrollment_step2\.html
-
-- url: /enrollment_step3\.html
-  static_files: enrollment_step3.html
-  upload: enrollment_step3\.html
-
-- url: /no_permission\.html
-  static_files: no_permission.html
-  upload: no_permission\.html
-  application_readable: true
-
-- url: /BuildaSingleScreenApp\.pdf
-  static_files: BuildaSingleScreenApp.pdf
-  upload: BuildaSingleScreenApp\.pdf
-
-- url: /CourtCounterApp\.pdf
-  static_files: CourtCounterApp.pdf
-  upload: CourtCounterApp\.pdf
-
-- url: /TourGuideApp\.pdf
-  static_files: TourGuideApp.pdf
-  upload: TourGuideApp\.pdf
-
-- url: /NewsApp\.pdf
-  static_files: NewsApp.pdf
-  upload: NewsApp\.pdf
-
-- url: /InventoryApp\.pdf
-  static_files: InventoryApp.pdf
-  upload: InventoryApp\.pdf
-
-- url: /banner\.png
-  static_files: banner.png
-  upload: banner\.png
-
-- url: /banner2\.png
-  static_files: banner2.png
-  upload: banner2\.png
-  
 - url: /img
   static_dir: img
+
+- url: /files
+  static_dir: files
 
 - url: /css
   static_dir: css
@@ -70,9 +20,16 @@ handlers:
 - url: /locales
   static_dir: locales
 
-- url: /help_data_upload
-  static_files: help_data_upload.html
-  upload: help_data_upload\.html
+- url: /pdf
+  static_dir: pdf
+
+- url: /enrollment_step2.html
+  static_files: templates/enrollment_step2.html
+  upload: templates/enrollment_step2\.html
+
+- url: /enrollment_step3.html
+  static_files: enrollment_step3.html
+  upload: enrollment_step3\.html
 
 - url: .*
   script: main.app

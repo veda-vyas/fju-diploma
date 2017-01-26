@@ -14,6 +14,13 @@ import json
 import re
 import traceback
 import logging
+import random
+import socket
+import string
+
+from google.appengine.api import app_identity
+from google.appengine.api import mail
+
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -47,6 +54,7 @@ class Enrollment(ndb.Model):
     skype_id = ndb.StringProperty()
     year_of_completion = ndb.StringProperty()
     selected_date = ndb.StringProperty()
+    selected_time = ndb.StringProperty()
     # fname = ndb.StringProperty()
     # email = ndb.StringProperty()
     # lname = ndb.StringProperty()
@@ -57,11 +65,25 @@ class Enrollment(ndb.Model):
     # pincode = ndb.IntegerProperty()
     # learningcenter = ndb.StringProperty()
 
+class AvailableDates(ndb.Model):
+    date = ndb.StringProperty()
+    time = ndb.StringProperty(repeated=True)
+
+def populateDates():
+    datearr = ["22/12/2016 (Thursday)","23/12/2016 (Friday)","24/12/2016 (Saturday)","25/12/2016 (Sunday)","26/12/2016 (Monday)","27/12/2016 (Tuesday)","28/12/2016 (Wednesday)"]
+    # timearr = ["09:00 AM - 11:00 AM","11:00 AM - 01:00 PM","01:00 PM - 03:00 PM","03:00 PM - 05:00 PM"]
+    timearr = ["09:00 AM - 1:00 PM"]
+    for i in datearr:
+        data = AvailableDates()
+        data.date = i
+        data.time = timearr
+        data.put()
 
 class HomeHandler(webapp2.RequestHandler):
     def get(self):
+        # populateDates()
         template_values = {"authorized":True}
-        template = JINJA_ENVIRONMENT.get_template('landing.html')
+        template = JINJA_ENVIRONMENT.get_template('templates/landing.html')
         self.response.write(template.render(template_values))
 
 class EnrollmentHandler(webapp2.RequestHandler):
@@ -75,7 +97,7 @@ class EnrollmentHandler(webapp2.RequestHandler):
         #     if len(match) == 0: 
         # template_values = {"email":user_email, "authorized":True, "url_linktext": url_linktext, "url":url}
         template_values = {"email":"", "authorized":True, "url_linktext": "", "url":""}
-        template = JINJA_ENVIRONMENT.get_template('enrollment.html')
+        template = JINJA_ENVIRONMENT.get_template('templates/enrollment.html')
         self.response.write(template.render(template_values))
         #     else:
         #         # self.redirect(users.create_login_url(self.request.uri))
@@ -96,7 +118,7 @@ class ProjectPageHandler(webapp2.RequestHandler):
             # if len(match) != 0:
                 # template_values = {"email":user_email, "authorized":True, "url_linktext": url_linktext, "url":url}
         template_values = {"email":"", "authorized":True, "url_linktext": "", "url":""}
-        template = JINJA_ENVIRONMENT.get_template('index.html')
+        template = JINJA_ENVIRONMENT.get_template('templates/index.html')
         self.response.write(template.render(template_values))
         #     else:
         #         url_linktext = 'Login with Another Email.'
@@ -126,6 +148,7 @@ class formSubmitHandler(webapp2.RequestHandler):
             enrolled.gender = self.request.get('gender')
             enrolled.country = self.request.get('country')
             enrolled.phonenumber = self.request.get('phonenumber')
+            enrolled.skype_id = self.request.get('skype_id')
             enrolled.address1 = self.request.get('address1')
             enrolled.address2 = self.request.get('address2')
             enrolled.state = self.request.get('state')
@@ -176,19 +199,110 @@ class dateSubmitHandler(webapp2.RequestHandler):
     def post(self):
         user_email = self.request.get('email')
         selected_date = self.request.get('selected_date')
+        selected_time = self.request.get('selected_time')
         match = Enrollment().query(Enrollment.email == user_email).fetch()
         if len(match) > 0:
             applicant = match[0]
             applicant.selected_date = selected_date
+            applicant.selected_time = selected_time
             applicant.put()
-            self.response.write(selected_date+user_email)
+            self.response.write(selected_date+selected_time+user_email)
         else:
             self.response.write("unregistered user")
+
+class SlotsHandler(webapp2.RequestHandler):
+    def post(self):
+        dataobj = {}
+        match = AvailableDates().query().fetch()
+        for i in match:
+            dataobj[i.date] = i.time
+        self.response.write(json.dumps(dataobj))
+
+class ProgrammingDiploma(webapp2.RequestHandler):
+    def get(self):
+        template_values = {"authorized":True}
+        template = JINJA_ENVIRONMENT.get_template('templates/programming_diploma.html')
+        self.response.write(template.render(template_values))
+
+class Navbar(webapp2.RequestHandler):
+    def get(self):
+        template_values = {"authorized":True}
+        template = JINJA_ENVIRONMENT.get_template('templates/navbar_responsive.html')
+        self.response.write(template.render(template_values))
+
+# class SendEmailHandler(webapp2.RequestHandler):
+#     """Serves the email address sign up form."""
+
+#     def post(self):
+#         user_address = self.request.get('email')
+#         user_address = user_address.replace("%40","@")
+
+#         if mail.is_email_valid(user_address):
+#             confirmation_url = create_new_user_confirmation(user_address)
+#             sender_address = (
+#                 'FJU Support <{}@appspot.gserviceaccount.com>'.format(
+#                     app_identity.get_application_id()))
+#             subject = 'Confirm your registration'
+#             body = """Thank you for creating an account!
+# Please confirm your email address by clicking on the link below:
+# {}
+# """.format(confirmation_url)
+#             mail.send_mail(sender_address, user_address, subject, body)
+# # [END send-confirm-email]
+#             self.response.content_type = 'text/plain'
+#             self.response.write('An email has been sent to {}.'.format(
+#                 user_address))
+
+
+# class UserConfirmationRecord(ndb.Model):
+#     """Datastore record with email address and confirmation code."""
+#     user_address = ndb.StringProperty(indexed=False)
+#     confirmed = ndb.BooleanProperty(indexed=False, default=False)
+#     timestamp = ndb.DateTimeProperty(indexed=False, auto_now_add=True)
+
+
+# def create_new_user_confirmation(user_address):
+#     """Create a new user confirmation.
+#     Args:
+#         user_address: string, an email addres
+#     Returns: The url to click to confirm the email address."""
+#     id_chars = string.ascii_letters + string.digits
+#     rand = random.SystemRandom()
+#     random_id = ''.join([rand.choice(id_chars) for i in range(42)])
+#     record = UserConfirmationRecord(user_address=user_address,
+#                                     id=random_id)
+#     record.put()
+#     return 'https://{}/user/confirm?code={}'.format(
+#         socket.getfqdn(socket.gethostname()), random_id)
+
+
+# class ConfirmEmailHandler(webapp2.RequestHandler):
+#     """Invoked when the user clicks on the confirmation link in the email."""
+
+#     def get(self):
+#         code = self.request.get('code')
+#         if code:
+#             record = ndb.Key(UserConfirmationRecord, code).get()
+#             # 2-hour time limit on confirming.
+#             if record and (datetime.datetime.now() - record.timestamp <
+#                            datetime.timedelta(hours=2)):
+#                 record.confirmed = True
+#                 record.put()
+#                 self.response.content_type = 'text/plain'
+#                 self.response.write('Confirmed {}.'
+#                                     .format(record.user_address))
+#                 return
+#         self.response.status_int = 404
 
 app = webapp2.WSGIApplication([
     ('/', HomeHandler),
     ('/enroll', EnrollmentHandler),
     ('/course', ProjectPageHandler),
     ('/formsubmit',formSubmitHandler),
-    ('/datesubmit',dateSubmitHandler)
+    ('/datesubmit',dateSubmitHandler),
+    ('/getavailableslots',SlotsHandler),
+    ('/programming_diploma', ProgrammingDiploma),
+    ('/navbar', Navbar)
+    # ('/sendmail', SendEmailHandler)
+    # ('/user/confirm', ConfirmEmailHandler),
 ], debug=True)

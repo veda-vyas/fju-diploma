@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mobile App Developer Diploma</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js"></script>
+	<script src="http://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/v4.0.0/src/js/bootstrap-datetimepicker.js"></script>
+	<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="http://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/v4.0.0/build/css/bootstrap-datetimepicker.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+	<script src="js/bootstrap-datepicker.js"></script>
+	<link href="css/bootstrap-datepicker.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="css/cover.css">
+	<script src="https://use.fontawesome.com/7c465464d6.js"></script>
+</head>
+<script type="text/javascript">
+	function submitForm() {
+		dataobj = {};
+		var data = $("form[name='enroll']").serialize();
+		data = data.split('&');
+		for(var i=0; i<data.length; i++){
+			dataobj[data[i].split('=')[0]] = data[i].split('=')[1];
+		}
+
+		$.post( "/formsubmit", dataobj, function( data ) {
+		   	if (data.startsWith("redirect")) {
+		   		localStorage.setItem("selected_date",data.substr(8,10))
+		   		localStorage.setItem("email",data.substr(18))
+		   		$("#progress").attr("value","75");
+			    $("#heading").html("Enrollment Process - Step 3");
+			    $("#supptext").html("You are already enrolled with us.");
+			    $("#content").html("");
+			    $("#content").load("enrollment_step3.html");
+		   	}else{
+		   		obj = JSON.parse(data);
+		   		localStorage.setItem('selected_dates', obj.selected_dates);
+				localStorage.setItem('email', obj.email)
+		   		$("#progress").attr("value","50");
+				$("#heading").html("Enrollment Process - Step 2");
+				$("#supptext").html("You are registered with email: "+obj['email'].replace("%40","@")+". Please choose a date to take the Entrance Exams.");
+				$("#content").html("");
+				$("#content").load("enrollment_step2.html");
+		  	}
+		});
+	}
+</script>
+<link rel="stylesheet" type="text/css" href="css/navbar.css">
+<body>
+	<div id="small_head" class="conatiner col-md-12 text-xs-center" style="height: 100%"><br>
+			<h1 class="logo text-xs-left">
+				<a id="log" href="#">
+					<img style="border: 1px solid black; border-radius: 50%;" src="img/logo.png"> &nbsp;Franklin Jefferson University
+				</a>
+			</h1>
+			<h1 class="col-md-12">Mobile App Development</h1>
+			<h3 style="font-weight: 100;">Online Diploma Program</h3>
+			<h5 style="font-weight: 100;">Learning to Create Android Apps. Mastery in 6 Months</h5><br>
+		</div>
+		<!-- <div class="col-md-3"></div><div class="col-md-3"></div> -->
+	<!-- </div> -->
+	<!-- <div style="padding: 0px;" class="container-fluid text-xs-right">
+		<img style="border: 0px solid #ccc;" width="100%" height="350px" src="img/banner2.png">
+		 -->
+		<!-- <p>Android apps are everywhere, and learning to build them can be a fantastic career move. No programming experience? No problem! The skills you learn in this beginning program will accelerate your journey to becoming a working Android Developer.</p>
+		<p>Learn the Java language, and start building amazing new apps for those billion (and counting!) Android devices!</p> -->
+	<!-- </div> -->
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<!-- <h1 class="text-xs-center">FJU Android Diploma Program</h1><br> -->
+			<div class="col-md-2"></div>
+			<div id="stepscontainer" class="col-md-8">
+				<!-- <hr> --><br><br>
+				<progress id="progress" style="height: 10px" class="progress progress-success" value="25" max="75"></progress>
+				<h4 id="heading">Enrollment Process - Step 1</h4>
+				<small id="supptext" class="text-muted">Please fill out some Personal Information</small>
+				<div id="content">
+					<br>
+					<form action="javascript:submitForm()" id="enrollform" name="enroll">
+					  	<div class="row">
+					  		<div class="form-group col-md-6">
+							    <b><label for="FName" id="first_name">First Name</label></b>
+							    <input type="text" class="form-control" name="first_name" aria-describedby="emailHelp" placeholder="Enter your First Name" data-validation="length" data-validation-length="min1">
+						  	</div>
+						  	<div class="form-group col-md-6">
+							    <b><label for="LName" id="last_name">Last Name</label></b>
+							    <input type="text" class="form-control" name="last_name" aria-describedby="emailHelp" placeholder="Enter your Last Name" data-validation="length" data-validation-length="min1">
+						  	</div>
+					  	</div>
+					  	<div class="row">
+					  		<div class="form-group col-md-6">
+							    <b><label for="email" id="email">Email Address</label></b>
+							    <input type="text" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter your Email Address" data-validation="email">
+						  	</div>
+						  	<div class="form-group col-md-6">
+					            <div class="input-group datetime datepicker">
+					              <b><label for="dob" id="dob">Date of Birth</label></b>
+								  <input class="form-control make-datepicker" type="text" name="dob" placeholder="Enter Date of Birth" data-validation="required">
+								</div>
+					        </div>
+					  	</div>
+					  	<div class="row">
+					  		<div class="form-group col-md-6">
+						        <b><label for="gender" class="control-label" id="gender">Gender</label></b>
+						        <div>
+						            <select class="form-control" name="gender">
+						                <option value="Male">Male</option>
+						                <option value="Female">Female</option>
+						            </select>
+						        </div>
+						    </div>
+							<div class="form-group col-md-6">
+						        <b><label for="country" class="control-label">Country</label></b>
+						        <input class="form-control" name="country" id="country" data-validation="country">
+						        <!-- <div>
+						            <select class="form-control" name="country">
+						                <option value="United States">United States</option>
+						                <option value="Bulgaria">Bulgaria</option>
+						                <option value="Brazil">Brazil</option>
+						                <option value="China">China</option>
+						                <option value="Czech Republic">Czech Republic</option>
+						                <option value="Denmark">Denmark</option>
+						                <option value="France">France</option>
+						                <option value="Germany">Germany</option>
+						                <option value="India" selected>India</option>
+						                <option value="Morocco">Morocco</option>
+						                <option value="Netherlands">Netherlands</option>
+						                <option value="Pakistan">Pakistan</option>
+						                <option value="Romania">Romania</option>
+						                <option value="Russia">Russia</option>
+						                <option value="Slovakia">Slovakia</option>
+						                <option value="Spain">Spain</option>
+						                <option value="Thailand">Thailand</option>
+						                <option value="United Arab Emirates">United Arab Emirates</option>
+						                <option value="United Kingdom">United Kingdom</option>
+						                <option value="Venezuela">Venezuela</option>
+						            </select>
+						        </div> -->
+							</div>
+					  	</div>
+					  	<div class="row">
+						    <div class="form-group col-md-6">
+						        <b><label for="phonenumber" class="control-label" id="phonenumber">Phone number</label></b>
+						        <div>
+						            <input type="text" class="form-control" name="phonenumber" placeholder="Phone number" data-validation="length number" data-validation-length="min10"/>
+						        </div>
+						    </div>
+						    <div class="form-group col-md-6">
+						        <b><label for="phonenumber" class="control-label" id="skype_id">Skype ID</label></b>
+						        <div>
+						            <input type="text" class="form-control" name="skype_id" placeholder="Skype ID" data-validation="length" data-validation-length="min6"/>
+						        </div>
+						    </div>
+					    </div>
+					    <div class="row">
+					    	<div class="col-md-12">
+						    	<b><label id="address">Address</label></b>
+					    	</div>
+					    	<div class="col-md-12"><input type="text" class="form-control" name="address1" aria-describedby="emailHelp" placeholder="Address Line 1"><br></div>
+					    	<div class="col-md-12"><input type="text" class="form-control" name="address2" aria-describedby="emailHelp" placeholder="Address Line 2"><br></div>
+							<div class="col-md-6"><input type="text" class="form-control" name="state" placeholder="State" data-validation="length" data-validation-length="min3"></div>
+						  	<div class="col-md-6"><input type="text" class="form-control" name="pincode" placeholder="Pincode" data-validation="length number" data-validation-length="min6"></div>
+					    </div><br>
+					  
+					    <div class="row">
+						    <div class="col-md-12">
+						    	<b><label id="graduation">Graduation</label></b>
+						    </div>
+				    		<div class="form-check col-md-12">
+						      <label class="form-check-label">
+						        <input type="radio" class="form-check-input" name="graduation_status" value="pursuing">
+						        Current Student
+						      </label>&nbsp;&nbsp;
+						      <label class="form-check-label">
+						        <input type="radio" class="form-check-input" name="graduation_status" value="completed" checked>
+						        Graduated
+						      </label>
+						    </div>
+						    <div class="col-md-12">
+						    	<div class="col-md-6">
+							    	<input type="text" class="form-control" name="college" placeholder="University/College Name" data-validation="length" data-validation-length="min1">
+							    </div>
+							    <div class="col-md-3">
+						    		<input type="text" class="form-control" name="course" placeholder="program" data-validation="length" data-validation-length="min1">
+					    		</div>
+					    		<div class="col-md-3">
+						    		<input type="text" class="form-control" name="branch" placeholder="branch" data-validation="length" data-validation-length="min1">
+					    		</div>
+						    </div>
+				    		<div class="col-md-12">
+				    			<br>
+				    			<div class="col-md-4">
+					    			<input type="text" class="form-control" name="GPA" id="GPA" placeholder="GPA" data-validation="length" data-validation-length="min1">
+							    </div>
+						    	<div class="col-md-4">
+							    	<input type="text" class="form-control" name="year_of_completion" id="year_of_completion" placeholder="Year of passing" data-validation="birthdate" data-validation-format="yyyy">
+						    	</div>
+				    		</div>
+						</div>
+						<small class="text-muted"><br>Please consider to preview the form before submitting.</small>
+					  	<div class="text-xs-right col-md-12">
+					  		<button style="margin-top: 3%" type="button" id="preview" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">Preview</button>
+					  		<button style="margin-top: 3%" type="submit" id="enrollSubmit" class="btn btn-primary">Submit</button>
+						</div>
+					</form>
+				</div>
+
+				<!-- Preview Modal -->
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				        <h4 class="modal-title" id="myModalLabel">Preview Enrollment Form</h4>
+				      </div>
+				      <div class="modal-body">
+				      	<table class="table table-hover">
+						  <thead>
+						    <tr>
+						      <th>Field Name</th>
+						      <th>Your Response</th>
+						    </tr>
+						  </thead>
+						  <tbody id="formbody"></tbody>
+						</table>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+
+			</div><br>
+			<div class="col-md-2"></div>
+		</div>
+	</div>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+<script>
+
+  $.validate({
+    modules : 'location, date, security, file',
+    onModulesLoaded : function() {
+      $('#country').suggestCountry();
+    }
+  });
+</script>
+<script type="text/javascript">
+
+// auto fetch country name
+var countryCodes = {
+    'AF' : 'Afghanistan',
+    'AX' : 'Aland Islands',
+    'AL' : 'Albania',
+    'DZ' : 'Algeria',
+    'AS' : 'American Samoa',
+    'AD' : 'Andorra',
+    'AO' : 'Angola',
+    'AI' : 'Anguilla',
+    'AQ' : 'Antarctica',
+    'AG' : 'Antigua And Barbuda',
+    'AR' : 'Argentina',
+    'AM' : 'Armenia',
+    'AW' : 'Aruba',
+    'AU' : 'Australia',
+    'AT' : 'Austria',
+    'AZ' : 'Azerbaijan',
+    'BS' : 'Bahamas',
+    'BH' : 'Bahrain',
+    'BD' : 'Bangladesh',
+    'BB' : 'Barbados',
+    'BY' : 'Belarus',
+    'BE' : 'Belgium',
+    'BZ' : 'Belize',
+    'BJ' : 'Benin',
+    'BM' : 'Bermuda',
+    'BT' : 'Bhutan',
+    'BO' : 'Bolivia',
+    'BA' : 'Bosnia And Herzegovina',
+    'BW' : 'Botswana',
+    'BV' : 'Bouvet Island',
+    'BR' : 'Brazil',
+    'IO' : 'British Indian Ocean Territory',
+    'BN' : 'Brunei Darussalam',
+    'BG' : 'Bulgaria',
+    'BF' : 'Burkina Faso',
+    'BI' : 'Burundi',
+    'KH' : 'Cambodia',
+    'CM' : 'Cameroon',
+    'CA' : 'Canada',
+    'CV' : 'Cape Verde',
+    'KY' : 'Cayman Islands',
+    'CF' : 'Central African Republic',
+    'TD' : 'Chad',
+    'CL' : 'Chile',
+    'CN' : 'China',
+    'CX' : 'Christmas Island',
+    'CC' : 'Cocos (Keeling) Islands',
+    'CO' : 'Colombia',
+    'KM' : 'Comoros',
+    'CG' : 'Congo',
+    'CD' : 'Congo, Democratic Republic',
+    'CK' : 'Cook Islands',
+    'CR' : 'Costa Rica',
+    'CI' : 'Cote D\'Ivoire',
+    'HR' : 'Croatia',
+    'CU' : 'Cuba',
+    'CY' : 'Cyprus',
+    'CZ' : 'Czech Republic',
+    'DK' : 'Denmark',
+    'DJ' : 'Djibouti',
+    'DM' : 'Dominica',
+    'DO' : 'Dominican Republic',
+    'EC' : 'Ecuador',
+    'EG' : 'Egypt',
+    'SV' : 'El Salvador',
+    'GQ' : 'Equatorial Guinea',
+    'ER' : 'Eritrea',
+    'EE' : 'Estonia',
+    'ET' : 'Ethiopia',
+    'FK' : 'Falkland Islands (Malvinas)',
+    'FO' : 'Faroe Islands',
+    'FJ' : 'Fiji',
+    'FI' : 'Finland',
+    'FR' : 'France',
+    'GF' : 'French Guiana',
+    'PF' : 'French Polynesia',
+    'TF' : 'French Southern Territories',
+    'GA' : 'Gabon',
+    'GM' : 'Gambia',
+    'GE' : 'Georgia',
+    'DE' : 'Germany',
+    'GH' : 'Ghana',
+    'GI' : 'Gibraltar',
+    'GR' : 'Greece',
+    'GL' : 'Greenland',
+    'GD' : 'Grenada',
+    'GP' : 'Guadeloupe',
+    'GU' : 'Guam',
+    'GT' : 'Guatemala',
+    'GG' : 'Guernsey',
+    'GN' : 'Guinea',
+    'GW' : 'Guinea-Bissau',
+    'GY' : 'Guyana',
+    'HT' : 'Haiti',
+    'HM' : 'Heard Island & Mcdonald Islands',
+    'VA' : 'Holy See (Vatican City State)',
+    'HN' : 'Honduras',
+    'HK' : 'Hong Kong',
+    'HU' : 'Hungary',
+    'IS' : 'Iceland',
+    'IN' : 'India',
+    'ID' : 'Indonesia',
+    'IR' : 'Iran, Islamic Republic Of',
+    'IQ' : 'Iraq',
+    'IE' : 'Ireland',
+    'IM' : 'Isle Of Man',
+    'IL' : 'Israel',
+    'IT' : 'Italy',
+    'JM' : 'Jamaica',
+    'JP' : 'Japan',
+    'JE' : 'Jersey',
+    'JO' : 'Jordan',
+    'KZ' : 'Kazakhstan',
+    'KE' : 'Kenya',
+    'KI' : 'Kiribati',
+    'KR' : 'Korea',
+    'KW' : 'Kuwait',
+    'KG' : 'Kyrgyzstan',
+    'LA' : 'Lao People\'s Democratic Republic',
+    'LV' : 'Latvia',
+    'LB' : 'Lebanon',
+    'LS' : 'Lesotho',
+    'LR' : 'Liberia',
+    'LY' : 'Libyan Arab Jamahiriya',
+    'LI' : 'Liechtenstein',
+    'LT' : 'Lithuania',
+    'LU' : 'Luxembourg',
+    'MO' : 'Macao',
+    'MK' : 'Macedonia',
+    'MG' : 'Madagascar',
+    'MW' : 'Malawi',
+    'MY' : 'Malaysia',
+    'MV' : 'Maldives',
+    'ML' : 'Mali',
+    'MT' : 'Malta',
+    'MH' : 'Marshall Islands',
+    'MQ' : 'Martinique',
+    'MR' : 'Mauritania',
+    'MU' : 'Mauritius',
+    'YT' : 'Mayotte',
+    'MX' : 'Mexico',
+    'FM' : 'Micronesia, Federated States Of',
+    'MD' : 'Moldova',
+    'MC' : 'Monaco',
+    'MN' : 'Mongolia',
+    'ME' : 'Montenegro',
+    'MS' : 'Montserrat',
+    'MA' : 'Morocco',
+    'MZ' : 'Mozambique',
+    'MM' : 'Myanmar',
+    'NA' : 'Namibia',
+    'NR' : 'Nauru',
+    'NP' : 'Nepal',
+    'NL' : 'Netherlands',
+    'AN' : 'Netherlands Antilles',
+    'NC' : 'New Caledonia',
+    'NZ' : 'New Zealand',
+    'NI' : 'Nicaragua',
+    'NE' : 'Niger',
+    'NG' : 'Nigeria',
+    'NU' : 'Niue',
+    'NF' : 'Norfolk Island',
+    'MP' : 'Northern Mariana Islands',
+    'NO' : 'Norway',
+    'OM' : 'Oman',
+    'PK' : 'Pakistan',
+    'PW' : 'Palau',
+    'PS' : 'Palestinian Territory, Occupied',
+    'PA' : 'Panama',
+    'PG' : 'Papua New Guinea',
+    'PY' : 'Paraguay',
+    'PE' : 'Peru',
+    'PH' : 'Philippines',
+    'PN' : 'Pitcairn',
+    'PL' : 'Poland',
+    'PT' : 'Portugal',
+    'PR' : 'Puerto Rico',
+    'QA' : 'Qatar',
+    'RE' : 'Reunion',
+    'RO' : 'Romania',
+    'RU' : 'Russian Federation',
+    'RW' : 'Rwanda',
+    'BL' : 'Saint Barthelemy',
+    'SH' : 'Saint Helena',
+    'KN' : 'Saint Kitts And Nevis',
+    'LC' : 'Saint Lucia',
+    'MF' : 'Saint Martin',
+    'PM' : 'Saint Pierre And Miquelon',
+    'VC' : 'Saint Vincent And Grenadines',
+    'WS' : 'Samoa',
+    'SM' : 'San Marino',
+    'ST' : 'Sao Tome And Principe',
+    'SA' : 'Saudi Arabia',
+    'SN' : 'Senegal',
+    'RS' : 'Serbia',
+    'SC' : 'Seychelles',
+    'SL' : 'Sierra Leone',
+    'SG' : 'Singapore',
+    'SK' : 'Slovakia',
+    'SI' : 'Slovenia',
+    'SB' : 'Solomon Islands',
+    'SO' : 'Somalia',
+    'ZA' : 'South Africa',
+    'GS' : 'South Georgia And Sandwich Isl.',
+    'ES' : 'Spain',
+    'LK' : 'Sri Lanka',
+    'SD' : 'Sudan',
+    'SR' : 'Suriname',
+    'SJ' : 'Svalbard And Jan Mayen',
+    'SZ' : 'Swaziland',
+    'SE' : 'Sweden',
+    'CH' : 'Switzerland',
+    'SY' : 'Syrian Arab Republic',
+    'TW' : 'Taiwan',
+    'TJ' : 'Tajikistan',
+    'TZ' : 'Tanzania',
+    'TH' : 'Thailand',
+    'TL' : 'Timor-Leste',
+    'TG' : 'Togo',
+    'TK' : 'Tokelau',
+    'TO' : 'Tonga',
+    'TT' : 'Trinidad And Tobago',
+    'TN' : 'Tunisia',
+    'TR' : 'Turkey',
+    'TM' : 'Turkmenistan',
+    'TC' : 'Turks And Caicos Islands',
+    'TV' : 'Tuvalu',
+    'UG' : 'Uganda',
+    'UA' : 'Ukraine',
+    'AE' : 'United Arab Emirates',
+    'GB' : 'United Kingdom',
+    'US' : 'United States',
+    'UM' : 'United States Outlying Islands',
+    'UY' : 'Uruguay',
+    'UZ' : 'Uzbekistan',
+    'VU' : 'Vanuatu',
+    'VE' : 'Venezuela',
+    'VN' : 'Viet Nam',
+    'VG' : 'Virgin Islands, British',
+    'VI' : 'Virgin Islands, U.S.',
+    'WF' : 'Wallis And Futuna',
+    'EH' : 'Western Sahara',
+    'YE' : 'Yemen',
+    'ZM' : 'Zambia',
+    'ZW' : 'Zimbabwe'
+};
+
+var inverseCountryCodes = {};
+for(i in countryCodes) {
+   inverseCountryCodes[countryCodes[i]] = i;
+}
+$(document).ready(function(){
+	$.get("https://ipinfo.io", function(response) {
+	    $("#country").attr("value", countryCodes[response.country]);
+	}, "jsonp");
+});
+
+
+$(document).ready(function(){
+
+	$("#preview").click(function() {
+		$("#formbody").html("");
+		var data = $("form[name='enroll']").serialize();
+		data = data.split('&');
+		console.log(data);
+		for(var i in data){
+			var field = data[i].split("=")[0];
+			var value = data[i].split("=")[1];
+			$("#formbody").append("<tr><td>"+field+"</td><td>"+value+"</td></tr>");
+		}
+	})
+	// var today = new Date();
+	// var year = today.getFullYear();
+	// var month = today.getMonth();
+	// var date = today.getDate();
+	// var monthNames = [
+	//   "January", "February", "March",
+	//   "April", "May", "June", "July",
+	//   "August", "September", "October",
+	//   "November", "December"
+	// ];
+	// for(var i=0; i<30; i++){
+	//       var day=new Date(year, month, date + i);
+	//       // console.log(day.getDate().toString()+" "+monthNames[day.getMonth()]+" "+day.getFullYear().toString());  
+	//       // console.log(day.toLocaleDateString())
+	// }
+
+	$('.datepicker').each(function(k, v) {
+	  var $input = $(v).find('.make-datepicker');
+	  $input.datetimepicker({
+	    format: 'MMM Do YYYY',
+	    collapse: true
+	  });
+	  $(v).find('span.input-group-addon').click(function(e) {
+	    $input.focus(); 
+	  });
+	});
+
+	$('input[type=radio][name=graduation_status]').change(function() {
+		$("#GPA").attr('disabled', function (_, attr) { return !attr });
+		$("#year_of_completion").attr('disabled', function (_, attr) { return !attr });
+	})
+
+
+	// $("#enrollSubmit").click(function(event){
+		// function formValidation() {
+		// 	var data = $("form[name='enroll']").serialize();
+		// 	data = data.split('&');
+		// 	required_fields = ["first_name", "last_name", "email", "dob", "gender", "country", "phonenumber", "skype_id", "address1", "state", "pincode", "graduation_status", "college", "course", "branch", "GPA", "year_of_completion"];
+		// 	var isValid = true;
+		// 	for(var i in data){
+		// 		var field = data[i].split("=")[0];
+		// 		var value = data[i].split("=")[1];
+		// 		var email_regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+		// 		var phone_regex = /([0-9]{10})|(\([0-9]{3}\)\s+[0-9]{3}\-[0-9]{4})/;
+		// 		if(required_fields.indexOf(field) != -1){
+		// 			if(value==""){
+		// 				if(required_fields.indexOf(field) > 10)
+		// 					$("#graduation").addClass("error");
+		// 				else if (required_fields.indexOf(field) > 7)
+		// 					$("#address").addClass("error");
+		// 				else
+		// 					$("#"+field).addClass("error");
+		// 				isValid = false;
+		// 			}else{
+		// 				if(required_fields.indexOf(field) > 10)
+		// 					$("#graduation").removeClass("error");
+		// 				else if (required_fields.indexOf(field) > 7)
+		// 					$("#address").removeClass("error");
+		// 				else
+		// 					if(field=="email"){
+  // 								isValid = email_regex.test(value);
+  // 								console.log(isValid);
+		// 					}
+		// 					if(field=="phonenumber"){
+  // 								isValid = phone_regex.test(value);
+		// 					}
+		// 					$("#"+field).removeClass("error");
+		// 			}
+		// 		}
+		// 	}
+		// 	return isValid;
+		// }
+		
+		// console.log($("form[name='enroll']").serialize())
+		// if(formValidation()){
+		// 	console.log("can submit");
+		// 	// submitForm();
+		// }
+	// });
+});
+				
+</script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 <br><div style="border: 1px solid #5cb85c" class="card card-outline-secondary  col-md-12">
-  <div class="card-block">
+  <div>
 	<!-- <b><h2 class="card-title text-xs-center">General Competency Test</h2></b>
 	<h6 class="card-subtitle text-muted text-xs-center">The purpose of this test is to evaluate your PUC level skills.</h6>
 	<p>The competency test consists of 3 components:
@@ -10,75 +10,138 @@
 	</ul>
 	</p>
 	<div class="text-xs-right"><a class="btn btn-primary" href="http://fju-gct.appspot.com/" target="_blank">Take me to the Test Portal</a></div> -->
+	<br>
 	<b><h2 class="card-title text-xs-center">Entrance Tests</h2></b><br>
-	<h6 class="card-subtitle text-muted text-xs-center">Please choose a suitable timeslot to take the Entrance Exams.</h6><br>
-	<div class="col-md-5" style="border: 1px solid black" id="test_slots"></div>
-	<div class="col-md-7">
-		<ul>
+	<h6 class="text-xs-center">Please choose a suitable date to take the Entrance Exams.</h6><br>
+	<div class="col-md-6 text-xs-left" id="test_slots" >
+		<div id="test_date" class="form-group col-md-12">
+	        <b><label for="testdate" class="control-label">Test Date</label></b>
+	        <div>
+	            <select class="form-control" name="testdate" id="testdate"></select>
+	        </div>
+	    </div>
+	    <div class="col-md-12 text-xs-left"><br>
+	    	<span>Date of Entrance Test: <b id="selected_date"></b></span><br>
+	    	<span>Exam Timings: <b>09:00 AM - 01:00 PM</b></span><br>
+			<span>Exam Duration: <b>4 Hours</b></span><br><br>
+	    </div>
+	</div>
+	<div class="col-md-6">
+		<!-- <h5>Entrance Tests: </h5>
+		<ul style="padding-left: 20px; list-style-type: none">
+			<li>Aptitude Test: <b>30 minutes</b></li>
+			<li>English Comprehension Test:<br> <b>15 minutes</b></li>
+		</ul> -->
+	</div>
+	<!-- <div class="col-md-6"> -->
+		<!-- <div style="padding-left: 39px">Selected Date: <b id="selected_slot"></b> <br>Exam Timings: <b id="selected_time"></b></div> -->
+		<!-- <b><label for="testtime" class="control-label">Test Time</label></b><br>
+		<div id="times"></div> --><!-- <button class="btn btn-secondary time">9:00 AM - 11:00 AM</button>
+		<button class="btn btn-secondary time">9:00 AM - 11:00 AM</button>
+		<button class="btn btn-secondary time">9:00 AM - 11:00 AM</button>
+		<button class="btn btn-secondary time">9:00 AM - 11:00 AM</button> -->
+		<!-- <ul>
 			<li>You can book slots at any date starting from today.</li>
 			<li>You cannot book a slot on Sunday.</li>
 			<li>Some dates are disabled which means they are already booked.</li>
 		</ul>
-		<p>Exam commences at 9 A.M in the morning on selected date.</p>
-	</div>
-	<br>
+		<p>Exam commences at 9 A.M in the morning on selected date.</p> -->
+	<!-- </div> -->
   </div>
-  <div style="padding-left: 39px">Selected Date: <b id="selected_slot"></b></div>
-  <div class="text-xs-right"><a class="btn btn-primary disabled" id="finish">Finish</a></div><br>
-</div>
+  <!-- <div style="padding-left: 39px">Selected Date: <b id="selected_slot"></b> <b id="selected_time"></b></div> --><br>
+  <div class="col-md-12 text-xs-right"><button class="btn btn-primary" id="finish" style="margin-top: 20px; margin-bottom: 20px;">Proceed to pay Entrance Test Fee</button></div><br>
+</div><br>
 <script type="text/javascript">
 	var selected_date = "";	
+	var selected_time = "";
 	var email = localStorage.getItem('email')
-	var time = new Date().getHours();
-	var day = new Date().getDate();
-	if(time>9){
-		day+=1;	
-	}
-	if(day<10){
-		day = "0"+day
-	}
-	var month = new Date().getMonth()+1;
-	if(month<10){
-		month = "0"+month
-	}
-	var year = new Date().getFullYear();
-	var date = month+"/"+ day+"/"+ year;
-	var emonth = 0;
-	var eyear = 0;
-	if(month==12){
-		emonth = 1;
-		eyear = year+1;
-	}else{
-		emonth = month+1;
-		eyear = year;
-	}
-	var end_date = emonth+"/"+ day+"/"+ eyear;
+	$("#selected_date").html($("#test_date option:selected").val())
+
+	// var time = new Date().getHours();
+	// var day = new Date().getDate();
+	// if(time>9){
+	// 	day+=1;	
+	// }
+	// if(day<10){
+	// 	day = "0"+day
+	// }
+	// var month = new Date().getMonth()+1;
+	// if(month<10){
+	// 	month = "0"+month
+	// }
+	// var year = new Date().getFullYear();
+	// var date = month+"/"+ day+"/"+ year;
+	// var emonth = 0;
+	// var eyear = 0;
+	// if(month==12){
+	// 	emonth = 1;
+	// 	eyear = year+1;
+	// }else{
+	// 	emonth = month+1;
+	// 	eyear = year;
+	// }
+	// var end_date = emonth+"/"+ day+"/"+ eyear;
 	// console.log(typeof(localStorage.getItem('selected_dates')).split(","))
-	$('#test_slots').datepicker({
-	    startDate: date,
-	    endDate: end_date,
-	    daysOfWeekDisabled: "0",
-	    datesDisabled: localStorage.getItem('selected_dates').split(",")
+	// $('#test_slots').datepicker({
+	//     startDate: date,
+	//     endDate: end_date,
+	//     daysOfWeekDisabled: "0",
+	//     datesDisabled: localStorage.getItem('selected_dates').split(",")
+	// });
+	datamain = {}
+	$.post( "/getavailableslots", function( data ) {
+		data = JSON.parse(data)
+		datamain = data;
+		keys = []
+		for (var k in data) {
+			keys.push(k);	
+		};
+		keys.sort(function(a,b) {
+		  a = a.split('/').reverse().join('');
+		  b = b.split('/').reverse().join('');
+		  return a > b ? 1 : a < b ? -1 : 0;
+		});
+		for (var i in keys) {
+			$("#testdate").append("<option value='"+keys[i]+"'>"+keys[i]+"</option>");
+		}
 	});
 
-	$('#test_slots').on('changeDate', function(event) {
-	    $("#selected_slot").html(event.format());
-	    $("#finish").removeClass("disabled");
-	    selected_date = event.format();
+	$('#test_date').change(function(event) {
+		// $("#times").html("");
+		// $("#selected_slot").html("");
+	 //    selected_option = $("#test_date option:selected").val();
+	 //    for(var j in datamain[selected_option]){
+		// 	$("#times").append("<button class='btn btn-secondary time'>"+datamain[selected_option][j]+"</button>");
+		// }
+	    selected_date = $("#test_date option:selected").val();
+	    $("#selected_date").html(selected_date);
+	 //    $(".time").click(function(){
+		// 	// selected_time = $(this).text();
+		// 	selected_time = "09:00 AM - 01:00 PM"
+		// 	$("#selected_slot").html($("#test_date option:selected").val()+" "+selected_time);
+		// 	$("#finish").removeClass("disabled");
+		// });
+		// $("#finish").removeClass("disabled");
 	});
+
 	$("#finish").click(function() {
 		dataobj = {};
 		dataobj["email"] = email;
 		dataobj["selected_date"] = selected_date;
+		dataobj["selected_time"] = selected_time;
 		console.log(dataobj)
 		$.post( "/datesubmit", dataobj, function( data ) {
-			localStorage.setItem('email', data.substr(10))
-			localStorage.setItem('selected_date', data.substr(0,10))
+			localStorage.setItem('email', data.substr(23))
+			localStorage.setItem('selected_date', data.substr(0,22))
+			localStorage.setItem('selected_time', "09:00 AM - 01:00 PM")
 			$("#progress").attr("value","75");
 		    $("#heading").html("Enrollment Process - Step 3");
 		    $("#supptext").html("");
 		    $("#content").html("");
-		    $("#content").load("enrollment_step3.html");
+		    $("#content").load("/enrollment_step3");
 		});
+		// $.post( "/sendmail", dataobj, function( data ) {
+		// 	console.log(data);
+		// });
 	})
 </script>

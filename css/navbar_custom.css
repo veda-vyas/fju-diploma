@@ -1,0 +1,254 @@
+#logo {
+  width: 80px;
+  height: 70px;
+  margin: 5%;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
+#navbar {
+  background-color: #2d4250;
+  color: white;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+.navfield {
+  width: 16.6%;
+  margin-top: 35px;
+  text-align: left;
+}
+
+.navfield a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.navfield a:hover 
+{
+     color:white; 
+     text-decoration:none; 
+     cursor:pointer;  
+}
+
+p {
+  font-size: 16px;
+  color: black;
+  font-family: arial;
+}
+hr {
+  border-top: 5px solid #eee;
+}
+
+#heading_main {
+  font-family: Lucida Calligraphy;
+  font-size: 36px;
+}
+
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    z-index: 9999;
+    border-top: 2px solid black;
+    text-align: left;
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 190px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 10px 14px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid gray;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1; color: black;}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+
+.dropdown-submenu {
+    position:relative;
+    min-width: 190px;
+}
+.dropdown-submenu .dropdown-subcontent {
+   display: none;
+   top: 0;
+ }
+
+ .dropdown-submenu:hover .dropdown-subcontent {
+   display: block;
+   top:0;right:100%;
+   background-color: #f1f1f1; color: black;
+   position: absolute;
+   min-width: 230px;
+   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+   z-index: 9999;
+    border-top: 2px solid black;
+ }
+
+.dropdown-subcontent a:hover {
+  background-color: #f9f9f9;
+}
+  
+.dropdown-submenu > a:after {
+  border-color: transparent transparent transparent #333;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  content: " ";
+  display: block;
+  float: right;  
+  height: 0;     
+  margin-right: -10px;
+  margin-top: 5px;
+  width: 0;
+}
+ 
+#navsrow {
+  display: flex;
+}
+
+.dropdown-submenu>a:after {
+    border-left-color:#555;
+    display: block;
+ }
+
+#sm {
+  display: none;
+}
+#xsm {
+  display: none;
+}
+
+@media only screen 
+  and (min-device-width: 300px) 
+  and (max-device-width: 838px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+    .navfield {
+      width: 100%;
+      text-align: center;
+    }
+    .dropdown {
+      width: 100%;
+      text-align: center;
+    }
+    #nav_fields {
+      display: none;
+    }
+    .log {
+      text-align: center;
+    }
+    #navsrow {
+      display: block;
+    }
+    #logofield {
+      width: 100%;
+    }
+    #navfields {
+      width: 100%;
+    }
+    #logo {
+      margin:0px;
+      margin-top: 20px;
+    }
+}
+
+@media only screen 
+  and (min-device-width: 839px) 
+  and (max-device-width: 897px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+    #lg {
+      display: none;
+    }
+    #lp {
+      display: none;
+    }
+    #tp {
+      display: none;
+    }
+    #sm {
+      display: none;
+    }
+    #xsm {
+      display: block;
+    }
+    #nav_fields {
+      display: none;
+    }
+    .navfield {
+      width: 25%;
+    }
+    #logofield {
+      width: 10%;
+    }
+    #navfields {
+      width: 90%;
+    }
+
+}
+
+@media only screen 
+  and (min-device-width: 1001px) 
+  and (max-device-width: 1198px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+    #lg {
+      display: none;
+    }
+    #lp {
+      display: none;
+    }
+    #sm {
+      display: block;
+    }
+    .navfield {
+      width: 20%;
+    }
+}
+
+@media only screen 
+  and (min-device-width: 898px) 
+  and (max-device-width: 1000px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+    #lg {
+      display: none;
+    }
+    #lp {
+      display: none;
+    }
+    #tp {
+      display: none;
+    }
+    #sm {
+      display: none;
+    }
+    #xsm {
+      display: block;
+    }
+    #nav_fields {
+      display: none;
+    }
+    .navfield {
+      width: 25%;
+    }
+    #logofield {
+      width: 10%;
+    }
+    #navfields {
+      width: 90%;
+    }
+
+}
