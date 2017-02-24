@@ -17,6 +17,13 @@
 		font-size: 14px;
 		line-height: 1.42857143;
 	}
+	#nav_fields a{
+		color: #c2c2e0;
+		padding-bottom: 17px;
+	}
+	#nav_fields li a.selected{
+		border-bottom: 2px solid #c2c2e0;
+	}
 </style>
 <body>
 	<div id="navbar_field"></div>
@@ -25,20 +32,21 @@
 		<h3 style="font-weight: 100;">Online Diploma Program</h3>
 		<h5 style="font-weight: 100;">Learning to Create Android Apps. Mastery in 6 Months</h5><br>
 		<div>
-			<div id="nav_fields" class="text-xs-center">
-				<div class="col-md-1"></div>
-				<a class="col-md-2" href="#" style="color: #c2c2e0">Overview</a>			
-				<a class="col-md-2" href="#syllabus" style="color: #c2c2e0">Course Projects</a>
-				<a class="col-md-2" href="#why_dip" style="color: #c2c2e0">Why Diploma?</a>
-				<a class="col-md-2" href="#tuition" style="color: #c2c2e0">Tution</a>
-				<a class="col-md-2" href="#enroll_sec" style="color: #c2c2e0">Enrollment</a>
-				<div class="col-md-1"></div>
-			</div>
+			<ul id="nav_fields" style="list-style-type: none" class="text-xs-center">
+				<li class="col-md-1"></li>
+				<li><a class="col-md-2 selected" href="#small_head" >Overview</a></li>
+				<li><a class="col-md-2" href="#syllabus" >Course Projects</a></li>
+				<li><a class="col-md-2" href="#why_dip" >Why Diploma?</a></li>
+				<li><a class="col-md-2" href="#tuition" >Tution</a></li>
+				<li><a class="col-md-2" href="#enroll_sec" >Enrollment</a></li>
+				<li class="col-md-1"></li>
+			</ul>
 		</div>
 	</div> <!-- banner -->
 	
 	<div style="padding:0px; " class="container">
 		<div style="font-size:18px;" class="col-md-12 text-xs-left"><br>
+			<h2 class="text-xs-center">Overview</h2><br>
 			<p style="color: black">Mobile App Development is one of the diploma programs offerred by Franklin Jefferson University with the goal of creating experts in Android App Development. The curriculum of the program consists of a series of learning by doing projects designed to help students attain mastery in Android App Development. The list of seven projects to be completed is given below:</p><br>
 		</div>
 	</div> <!-- description field -->
@@ -198,13 +206,13 @@
 								</li>
 								<li>
 									<i class="glyphicon glyphicon-ok-sign" aria-hidden="true"></i> 
-									Take <b>Skype based Proctored Entrance Tests</b> and pass.
+									Take <b>Online Proctored Entrance Tests</b> and pass.
 									<ul style="padding-left:70px; margin-bottom: 10px">
 										<li>
-											<a href="https://docs.google.com/document/d/1fSixilv3WsIey-bkPG5bAFj-RtyjAMOIk4paGeOlfiU/edit?usp=sharing" style="color: blue" data-toggle="modal" data-target="#gct">General Competency Test</a>
+											<a href="https://docs.google.com/document/d/1fSixilv3WsIey-bkPG5bAFj-RtyjAMOIk4paGeOlfiU/edit?usp=sharing" style="color: blue" data-toggle="modal" data-target="#gct">General Competency Test</a> (<a style="color: blue; font-size: 14px" target="_blank" href="pdf/GCTSampleTest.pdf">Sample Test</a>)
 										</li>
 										<li>
-											<a href="https://docs.google.com/document/d/1rV7_knadv3Wh-vG1Tob9pb0AwyTg_5H2kvWdICkElFc/edit?usp=sharing" style="color: blue" data-toggle="modal" data-target="#pct">Programming Competency Test</a>
+											<a href="https://docs.google.com/document/d/1rV7_knadv3Wh-vG1Tob9pb0AwyTg_5H2kvWdICkElFc/edit?usp=sharing" style="color: blue" data-toggle="modal" data-target="#pct">Programming Competency Test</a> (<a style="color: blue; font-size: 14px" target="_blank" href="pdf/PCTSampleTest.pdf">Sample Test</a>)
 										</li>
 									</ul>
 								</li>
@@ -248,7 +256,7 @@
 							      </div>
 							      <div class="modal-body">
 							      	<h5>What is General Competency Test?</h5>
-							      	<p style="font-size: 16px; margin-bottom: 0px">General Competency Test is a Skype based online proctored examination to evaluate your PUC level skills. This test consists of two components:</p>
+							      	<p style="font-size: 16px; margin-bottom: 0px">General Competency Test is an Online proctored examination to evaluate your PUC level skills. This test consists of two components:</p>
 							      	<ul style="padding-left: 70px; margin-bottom: 0px">
 							      		<li>Aptitude Test</li>
 							      		<li>English Language Comprehension Test</li>
@@ -277,7 +285,7 @@
 							      </div>
 							      <div class="modal-body">
 							      	<h5>What is Programming Competency Test?</h5>
-							      	<p style="font-size: 16px; margin-bottom: 0px">Programming Competency Test is a Skype based proctored examination to evaluate your Coding skills.</p>
+							      	<p style="font-size: 16px; margin-bottom: 0px">Programming Competency Test is an Online proctored examination to evaluate your Coding skills.</p>
 							      	<br>
 							      	<h5>How do I take the Test?</h5>
 							      	<p style="font-size: 16px">To take the exam you must <a href="http://fju-diploma.appspot.com/enroll" style="color: blue">register</a> for the diploma program. Questions and instructions to get started will be communicated through an email at registered email address.<br>Requirements: <br>Before you can begin the test, make sure that Skype is installed in your laptop. If it is not installed you can get it <a href="https://www.skype.com/en/download-skype/skype-for-computer/" style="color: blue">here</a>.</p>
@@ -322,6 +330,12 @@
 <script type="text/javascript">
 	$.get("/navbar", function(data){
 		$("#navbar_field").replaceWith(data);
+	});
+</script>
+<script type="text/javascript">
+	$('#nav_fields li a').click(function() {
+	    $('#nav_fields li a').removeClass('selected');
+	    $(this).addClass('selected');
 	});
 </script>
 </html>
